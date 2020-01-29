@@ -41,14 +41,14 @@ public class LaxHopf
      */
     public double[][] calculateN(double t_start, double t_end, double t_inc, double x_start, double x_end, double x_inc)
     {
-        double[][] output = new double[(int)Math.ceil((x_end - x_start)/x_inc+1)][(int)Math.ceil((t_end - t_start)/t_inc+1)];
+        double[][] output = new double[(int)Math.ceil((t_end - t_start)/t_inc+1)][(int)Math.ceil((x_end - x_start)/x_inc+1)];
         
         for(int r = 0; r < output.length; r++)
         {
             for(int c = 0; c < output[r].length; c++)
             {
-                double t = t_start + c * t_inc;
-                double x = x_start + r * x_inc;
+                double t = t_start + r * t_inc;
+                double x = x_start + c * x_inc;
                 
                 output[r][c] = calculateN(t, x);
             }
@@ -56,6 +56,8 @@ public class LaxHopf
         
         return output;
     }
+
+
     
     /**
      * Calculates k(t,x) for a specified grid of points and returns the output as a matrix.
@@ -69,14 +71,14 @@ public class LaxHopf
      */
     public double[][] calculateK(double t_start, double t_end, double t_inc, double x_start, double x_end, double x_inc)
     {
-        double[][] output = new double[(int)Math.ceil((x_end - x_start)/x_inc+1)][(int)Math.ceil((t_end - t_start)/t_inc+1)];
+        double[][] output = new double[(int)Math.ceil((t_end - t_start)/t_inc+1)][(int)Math.ceil((x_end - x_start)/x_inc+1)];
         
         for(int r = 0; r < output.length; r++)
         {
             for(int c = 0; c < output[r].length; c++)
             {
-                double t = t_start + c * t_inc;
-                double x = x_start + r * x_inc;
+                double t = t_start + r * t_inc;
+                double x = x_start + c * x_inc;
                 
                 output[r][c] = calculateK(t, x) * 1609;
             }
