@@ -67,8 +67,8 @@ public class HeatMapFrame extends JFrame
 
         panel.setPreferredSize(new Dimension(640,640));
         
-        JPanel main = new JPanel();
-        main.add(panel);
+        JPanel main = new JPanel(new BorderLayout());
+        main.add(panel, BorderLayout.CENTER);
         
         JButton screenshot = new JButton("Screenshot");
         screenshot.addActionListener(new ActionListener()
@@ -79,11 +79,19 @@ public class HeatMapFrame extends JFrame
            }
         });
         
-        main.add(screenshot);
+        JPanel p = new JPanel();
+        p.add(screenshot);
+        
+        
+        main.add(p, BorderLayout.EAST);
         
         this.getContentPane().add(main);
         
         pack();
+        
+        p.setBackground(Color.white);
+        main.setBackground(Color.white);
+        setBackground(Color.white);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
