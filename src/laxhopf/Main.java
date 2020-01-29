@@ -33,11 +33,11 @@ public class Main {
         
         double[][] N = test.calculateN(0, 50, 1, 0, 500, 1);
 
-        HeatMapFrame displayN = new HeatMapFrame("Cumulative count", N, 50, 500);
+        HeatMapFrame displayN = new HeatMapFrame("Cumulative count", N, 50, 500, "s", "ft");
         
         double[][] k = test.calculateK(0, 50, 1, 0, 500, 1);
         
-        HeatMapFrame displayK = new HeatMapFrame("density", k, 50, 500);
+        HeatMapFrame displayK = new HeatMapFrame("density", k, 50, 500, "s", "ft");
         
     }
     

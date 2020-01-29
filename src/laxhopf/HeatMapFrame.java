@@ -4,6 +4,12 @@ import heatmap.Gradient;
 import heatmap.HeatMap;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * <p>This class is a very simple example of how to use the HeatMap class.</p>
@@ -35,22 +41,21 @@ public class HeatMapFrame extends JFrame
 {
     HeatMap panel;
 
-    public HeatMapFrame(String name, double[][] data, double xmax, double ymax) throws Exception
+    public HeatMapFrame(String name, double[][] data, double xmax, double ymax, String xlabel, String ylabel) throws Exception
     {
         super(name);
         boolean useGraphicsYAxis = false;
         
         // you can use a pre-defined gradient:
         panel = new HeatMap(data, useGraphicsYAxis, Gradient.GRADIENT_GREEN_YELLOW_ORANGE_RED);
-        
 
         // set miscelaneous settings
         panel.setDrawLegend(true);
 
-        panel.setXAxisTitle("Time (s)");
+        panel.setXAxisTitle("Time ("+xlabel+")");
         panel.setDrawXAxisTitle(true);
 
-        panel.setYAxisTitle("Distance (ft)");
+        panel.setYAxisTitle("Distance ("+ylabel+")");
         panel.setDrawYAxisTitle(true);
 
         panel.setCoordinateBounds(0, xmax, 0, ymax);
@@ -60,11 +65,69 @@ public class HeatMapFrame extends JFrame
         panel.setColorForeground(Color.black);
         panel.setColorBackground(Color.white);
 
-        this.getContentPane().add(panel);
+        panel.setPreferredSize(new Dimension(640,640));
+        
+        JPanel main = new JPanel();
+        main.add(panel);
+        
+        JButton screenshot = new JButton("Screenshot");
+        screenshot.addActionListener(new ActionListener()
+        {
+           public void actionPerformed(ActionEvent e)
+           {
+               screenshot();
+           }
+        });
+        
+        main.add(screenshot);
+        
+        this.getContentPane().add(main);
+        
+        pack();
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500,500);
+        
         setVisible(true);
+    }
+    
+    public void screenshot()
+    {
+        try
+        {
+            File file;
+            
+            File directory = new File("parameters.txt");
+            
+            JFileChooser chooser = new JFileChooser(directory);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "PNG images", "png");
+            chooser.setFileFilter(filter);
+            int returnVal = chooser.showSaveDialog(panel);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+               file = chooser.getSelectedFile();
+               
+               String path = file.getCanonicalPath();
+               
+               if(path.indexOf('.') == -1 || !path.substring(path.lastIndexOf('.')).equals(".png"))
+               {
+                   file = new File(path+".png");
+               }
+            }
+            else
+            {
+                return;
+            }
+            
+            BufferedImage image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+            Graphics g = image.getGraphics();
+            panel.paint(g);
+            ImageIO.write(image, "png", file);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace(System.err);
+        }
     }
 
 }
