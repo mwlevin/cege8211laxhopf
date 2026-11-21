@@ -1,6 +1,7 @@
 # CEGE 8211 Lax-Hopf homework: Python version
 
-This folder is a Python translation of the Java project in `../java`.
+This folder is a Python translation of the Java project in `../java`. Classes and methods have the same
+names as in Java, and each class is in a file with the same name (`LaxHopf.java` → `LaxHopf.py`).
 
 ## Requirements
 
@@ -15,28 +16,24 @@ pip install matplotlib
 Run from inside this `python` folder:
 
 ```
-python main.py
+python Main.py
 ```
 
 This computes N(t,x) and k(t,x) on a grid and opens a heat-map window for each. Close the windows to
-end the program. Use the save icon in a window's toolbar to save the plot as an image.
+end the program. Use the save icon in a window's toolbar, or `HeatMapFrame.screenshot("file.png")`,
+to save a plot as an image.
 
 ## What to fill in
 
-In `laxhopf.py`, write the parts marked `# fill this in`:
+In `LaxHopf.py`, write the parts marked `# fill this in`:
 
-- `LaxHopf.__init__(v, K, initial_condition)`: store the inputs and compute the initial cumulative counts.
-- `calculate_n(t, x)`: the cumulative count N(t,x), from the Lax-Hopf formula.
-- `calculate_k(t, x)`: the density k(t,x).
+- the constructor `LaxHopf(v, K, initialCondition)` (`__init__` in Python),
+- `calculateN(t, x)`: the cumulative count N(t,x),
+- `calculateK(t, x)`: the density k(t,x).
 
-`calculate_n_grid()` and `calculate_k_grid()` are already written. They call your methods at every
-point of the grid.
+Python does not allow two methods with the same name, so `calculateN` and `calculateK` each accept
+either form, as the Java overloads do: `calculateN(t, x)` returns one value, and
+`calculateN(t_start, t_end, t_inc, x_start, x_end, x_inc)` returns a matrix. The matrix form is already
+written; it calls your `calculateN(t, x)` at every point. You only need to write the `(t, x)` part.
 
-| Java                                   | Python                                    |
-|----------------------------------------|-------------------------------------------|
-| `Main.java`                            | `main.py`                                 |
-| `LaxHopf.java`                         | `laxhopf.py`                              |
-| `calculateN(t, x)`, `calculateK(t, x)` | `calculate_n(t, x)`, `calculate_k(t, x)`  |
-| `calculateN(t_start, ..., x_inc)`      | `calculate_n_grid(t_start, ..., x_inc)`   |
-| `calculateK(t_start, ..., x_inc)`      | `calculate_k_grid(t_start, ..., x_inc)`   |
-| `HeatMapFrame.java` and `heatMap/`     | `heatmap_frame.py` (uses matplotlib)      |
+`HeatMapFrame.py` replaces the Java `HeatMapFrame` and `heatMap` classes with matplotlib.
