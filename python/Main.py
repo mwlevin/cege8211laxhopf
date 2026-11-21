@@ -1,4 +1,4 @@
-"""Entry point for running the project. Python version of ``laxhopf/Main.java``.
+"""Entry point for running the project.
 
 Run from the python/ folder with::
 

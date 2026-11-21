@@ -1,9 +1,7 @@
-"""Python version of ``laxhopf/LaxHopf.java``."""
-
 import math
 import sys
 
-# Stand-ins for "infinity" that match the Java version's Double.MAX_VALUE and Integer.MAX_VALUE
+# Stand-ins for "infinity"
 DOUBLE_MAX_VALUE = sys.float_info.max
 INTEGER_MAX_VALUE = 2147483647
 
@@ -21,7 +19,7 @@ class LaxHopf:
         pass
 
     def calculateN(self, *args):
-        """Calculates the cumulative count N. Like the Java version, there are two ways to call it.
+        """Calculates the cumulative count N. There are two ways to call it.
 
         calculateN(t, x) calculates the cumulative count at a specific (t,x) point:
             :param t: time (s)
@@ -59,7 +57,7 @@ class LaxHopf:
         return 0.0
 
     def calculateK(self, *args):
-        """Calculates the density k. Like the Java version, there are two ways to call it.
+        """Calculates the density k. There are two ways to call it.
 
         calculateK(t, x) calculates the density at a specific (t,x) point:
             :param t: time (s)

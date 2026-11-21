@@ -1,4 +1,4 @@
-"""Displays a matrix as a heat map. Python version of ``laxhopf/HeatMapFrame.java``.
+"""Displays a matrix as a heat map.
 
 Uses matplotlib. Use the save icon in the plot window's toolbar to save a screenshot.
 """
@@ -6,7 +6,7 @@ Uses matplotlib. Use the save icon in the plot window's toolbar to save a screen
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
-# Same colors as Gradient.GRADIENT_GREEN_YELLOW_ORANGE_RED in the Java version
+# Color scale: green (low), yellow, orange, red (high)
 GRADIENT_GREEN_YELLOW_ORANGE_RED = LinearSegmentedColormap.from_list(
     "green_yellow_orange_red", ["#00ff00", "#ffff00", "#ffc800", "#ff0000"], N=500)
 
