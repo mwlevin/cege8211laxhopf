@@ -1,7 +1,4 @@
-# CEGE 8211 Lax-Hopf homework: Python version
-
-This folder is a Python translation of the Java project in `../java`. Classes and methods have the same
-names as in Java, and each class is in a file with the same name (`LaxHopf.java` → `LaxHopf.py`).
+# CEGE 8211 Lax-Hopf homework: Python
 
 ## Requirements
 
@@ -27,13 +24,10 @@ to save a plot as an image.
 
 In `LaxHopf.py`, write the parts marked `# fill this in`:
 
-- the constructor `LaxHopf(v, K, initialCondition)` (`__init__` in Python),
+- the constructor `LaxHopf(v, K, initialCondition)` (`__init__`),
 - `calculateN(t, x)`: the cumulative count N(t,x),
 - `calculateK(t, x)`: the density k(t,x).
 
-Python does not allow two methods with the same name, so `calculateN` and `calculateK` each accept
-either form, as the Java overloads do: `calculateN(t, x)` returns one value, and
+`calculateN` and `calculateK` can each be called two ways: `calculateN(t, x)` returns one value, and
 `calculateN(t_start, t_end, t_inc, x_start, x_end, x_inc)` returns a matrix. The matrix form is already
 written; it calls your `calculateN(t, x)` at every point. You only need to write the `(t, x)` part.
-
-`HeatMapFrame.py` replaces the Java `HeatMapFrame` and `heatMap` classes with matplotlib.
