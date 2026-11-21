@@ -28,6 +28,5 @@ In `LaxHopf.py`, write the parts marked `# fill this in`:
 - `calculateN(t, x)`: the cumulative count N(t,x),
 - `calculateK(t, x)`: the density k(t,x).
 
-`calculateN` and `calculateK` can each be called two ways: `calculateN(t, x)` returns one value, and
-`calculateN(t_start, t_end, t_inc, x_start, x_end, x_inc)` returns a matrix. The matrix form is already
-written; it calls your `calculateN(t, x)` at every point. You only need to write the `(t, x)` part.
+`calculateNGrid()` and `calculateKGrid()` are already written. They call your `calculateN(t, x)` and
+`calculateK(t, x)` at every point of a grid.

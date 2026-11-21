@@ -20,11 +20,11 @@ def main():
 
     test = LaxHopf(20, 0.2, initialCondition)
 
-    N = test.calculateN(0, 50, 1, 0, 500, 1)
+    N = test.calculateNGrid(0, 50, 1, 0, 500, 1)
 
     displayN = HeatMapFrame("Cumulative count", N, 50, 500, "s", "ft")
 
-    k = test.calculateK(0, 50, 1, 0, 500, 1)
+    k = test.calculateKGrid(0, 50, 1, 0, 500, 1)
 
     displayK = HeatMapFrame("density", k, 50, 500, "s", "ft")
 

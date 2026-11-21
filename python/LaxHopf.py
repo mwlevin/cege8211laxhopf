@@ -18,78 +18,68 @@ class LaxHopf:
         # fill this in
         pass
 
-    def calculateN(self, *args):
-        """Calculates the cumulative count N. There are two ways to call it.
+    def calculateNGrid(self, t_start, t_end, t_inc, x_start, x_end, x_inc):
+        """Calculates N(t,x) for a specified grid of points and returns the output as a matrix.
 
-        calculateN(t, x) calculates the cumulative count at a specific (t,x) point:
-            :param t: time (s)
-            :param x: space (m)
-            :return: N(t,x)
-
-        calculateN(t_start, t_end, t_inc, x_start, x_end, x_inc) calculates N(t,x) for a specified grid
-        of points and returns the output as a matrix (list of lists):
-            :param t_start: the smallest t value
-            :param t_end: the largest t value
-            :param t_inc: the t increment
-            :param x_start: the smallest x value
-            :param x_end: the largest x value
-            :param x_inc: the x increment
-            :return: a matrix containing the cumulative count values at each (t,x) coordinate.
+        :param t_start: the smallest t value
+        :param t_end: the largest t value
+        :param t_inc: the t increment
+        :param x_start: the smallest x value
+        :param x_end: the largest x value
+        :param x_inc: the x increment
+        :return: a matrix (list of lists) containing the cumulative count values at each (t,x) coordinate.
         """
-        if len(args) == 6:
-            t_start, t_end, t_inc, x_start, x_end, x_inc = args
+        output = [[0.0] * int(math.ceil((x_end - x_start) / x_inc + 1))
+                  for _ in range(int(math.ceil((t_end - t_start) / t_inc + 1)))]
 
-            output = [[0.0] * int(math.ceil((x_end - x_start) / x_inc + 1))
-                      for _ in range(int(math.ceil((t_end - t_start) / t_inc + 1)))]
+        for r in range(len(output)):
+            for c in range(len(output[r])):
+                t = t_start + r * t_inc
+                x = x_start + c * x_inc
 
-            for r in range(len(output)):
-                for c in range(len(output[r])):
-                    t = t_start + r * t_inc
-                    x = x_start + c * x_inc
+                output[r][c] = self.calculateN(t, x)
 
-                    output[r][c] = self.calculateN(t, x)
+        return output
 
-            return output
+    def calculateKGrid(self, t_start, t_end, t_inc, x_start, x_end, x_inc):
+        """Calculates k(t,x) for a specified grid of points and returns the output as a matrix.
 
-        t, x = args
+        :param t_start: the smallest t value
+        :param t_end: the largest t value
+        :param t_inc: the t increment
+        :param x_start: the smallest x value
+        :param x_end: the largest x value
+        :param x_inc: the x increment
+        :return: a matrix (list of lists) containing the density values at each (t,x) coordinate.
+        """
+        output = [[0.0] * int(math.ceil((x_end - x_start) / x_inc + 1))
+                  for _ in range(int(math.ceil((t_end - t_start) / t_inc + 1)))]
 
+        for r in range(len(output)):
+            for c in range(len(output[r])):
+                t = t_start + r * t_inc
+                x = x_start + c * x_inc
+
+                output[r][c] = self.calculateK(t, x) * 1609
+
+        return output
+
+    def calculateK(self, t, x):
+        """Calculates the density at a specific (t,x) point.
+
+        :param t: time (s)
+        :param x: space (m)
+        :return: k(t,x)
+        """
         # fill this in
         return 0.0
 
-    def calculateK(self, *args):
-        """Calculates the density k. There are two ways to call it.
+    def calculateN(self, t, x):
+        """Calculates the cumulative count at a specific (t,x) point.
 
-        calculateK(t, x) calculates the density at a specific (t,x) point:
-            :param t: time (s)
-            :param x: space (m)
-            :return: k(t,x)
-
-        calculateK(t_start, t_end, t_inc, x_start, x_end, x_inc) calculates k(t,x) for a specified grid
-        of points and returns the output as a matrix (list of lists):
-            :param t_start: the smallest t value
-            :param t_end: the largest t value
-            :param t_inc: the t increment
-            :param x_start: the smallest x value
-            :param x_end: the largest x value
-            :param x_inc: the x increment
-            :return: a matrix containing the density values at each (t,x) coordinate.
+        :param t: time (s)
+        :param x: space (m)
+        :return: N(t,x)
         """
-        if len(args) == 6:
-            t_start, t_end, t_inc, x_start, x_end, x_inc = args
-
-            output = [[0.0] * int(math.ceil((x_end - x_start) / x_inc + 1))
-                      for _ in range(int(math.ceil((t_end - t_start) / t_inc + 1)))]
-
-            for r in range(len(output)):
-                for c in range(len(output[r])):
-                    t = t_start + r * t_inc
-                    x = x_start + c * x_inc
-
-                    output[r][c] = self.calculateK(t, x) * 1609
-
-            return output
-
-        t, x = args
-
         # fill this in
         return 0.0
